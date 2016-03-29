@@ -1,27 +1,21 @@
 package com.jijjy.grace.apitrial;
 
-import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
-import android.view.View;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.widget.EditText;
+        import android.os.Bundle;
+        import android.support.v4.widget.SwipeRefreshLayout;
+        import android.support.v7.app.AppCompatActivity;
+        import android.support.v7.widget.LinearLayoutManager;
+        import android.support.v7.widget.RecyclerView;
+        import android.support.v7.widget.Toolbar;
 
-import com.alelak.soundroid.Soundroid;
-import com.alelak.soundroid.models.Track;
+        import com.alelak.soundroid.Soundroid;
+        import com.alelak.soundroid.models.Track;
 
-import java.util.ArrayList;
-import java.util.List;
+        import java.util.ArrayList;
+        import java.util.List;
 
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
+        import retrofit2.Call;
+        import retrofit2.Callback;
+        import retrofit2.Response;
 
 public class MainActivity extends AppCompatActivity {
     private static final String TAG = MainActivity.class.getName();
@@ -30,14 +24,16 @@ public class MainActivity extends AppCompatActivity {
     private SongAdapter songAdapter;
     private List<Track> tracks;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.content_main);
         setupToolbar();
         setupRecyclerView();
-        setupSWipeRefreshLayout();
+        setupSwipeRefreshLayout();
         getContent();
+
     }
 
     private void setupToolbar() {
@@ -45,7 +41,7 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
     }
 
-    private void setupSWipeRefreshLayout() {
+    private void setupSwipeRefreshLayout() {
         swipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipe_refresh_layout);
         swipeRefreshLayout.setColorSchemeResources(R.color.colorAccent);
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
@@ -53,7 +49,6 @@ public class MainActivity extends AppCompatActivity {
             public void onRefresh() {
                 getContent();
             }
-
         });
         swipeRefreshLayout.post(new Runnable() {
             @Override
@@ -75,8 +70,9 @@ public class MainActivity extends AppCompatActivity {
         recyclerView.setAdapter(songAdapter);
     }
 
+
     private void getContent() {
-        Call<List<Track>> call = Soundroid.getSoundcloudService().searchTracksByGenres("Gospel", 20);
+        Call<List<Track>> call = Soundroid.getSoundcloudService().searchTracksByGenres("Gospel HipHop", 20);
         call.enqueue(new Callback<List<Track>>() {
             @Override
             public void onResponse(Response<List<Track>> response) {
