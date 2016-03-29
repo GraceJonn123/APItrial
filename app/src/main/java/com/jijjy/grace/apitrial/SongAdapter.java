@@ -13,6 +13,8 @@ import android.widget.Toast;
 
 import com.alelak.soundroid.Soundroid;
 import com.alelak.soundroid.models.Track;
+import com.bumptech.glide.Glide;
+
 
 import java.io.IOException;
 import java.nio.InvalidMarkException;
@@ -42,7 +44,7 @@ public class SongAdapter extends RecyclerView.Adapter<SongAdapter.SongViewHolder
     }
 
     @Override
-    public void onBindViewHolder(SongAdapter.SongViewHolder holder, int position) {
+    public void onBindViewHolder(SongViewHolder holder, int position) {
         final Track track = tracks.get(position);
         holder.title.setText(track.title);
         Glide.with(context).load(track.artwork_url).error(R.color.colorPrimary).into(holder.artwork);
